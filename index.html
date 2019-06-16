@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Psychich Game.</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <div>
+            <p id="directions">Press spacebar to start playing!</p>
+            <p id="userchoice"></p>
+            <p id="computerchoice"></p>
+            <p id="wins"></p>
+            <p id="losses"></p>
+            <p id="guessLeft"></p>
+        </div>
+
+
+        <script type="text/javascript">
+        //Create an array that lists out all the options 
+        var computerChoices = ["a", "b", "s", "c"];
+       
+       //Create variables that hold the number of wins, loses, ties
+       var wins = 0;
+       var losses = 0;
+       var guessLeft = 0;
+       
+       
+       //create variables that hold references to the places in the HTML where we want to display things.
+
+       var userchoice = document.getElementById("userchoice");
+       var directions = document.getElementById("directions");
+       var computerchoice = document.getElementById("computerchoice");
+       var winstext = document.getElementById("wins");
+       var lossestext = document.getElementById("losses");
+       var guessLeft = document.getElementById("guessLeft");
+
+       
+        //Determines the function that is ran when ever a key is pressed
+        document.onkeydown = function(event){
+          
+          
+            //Determines which key is pressed
+            var userGuess = event.key;
+            //Determines the computers choice randomly
+            var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
+            // code run if these keys are pressed and the code block
+            
+
+            if (userGuess === computerGuess){
+                 console.log("You win");
+                 wins++
+                 winstext.textContent = "Wins" + wins;
+
+            }else {
+                console.log("You Lost");
+                losses++
+                lossestext.textContent = "losses" + losses;
+            }
+                // Display the user and computer guesses.
+                userchoice.textContent = "You chose: " + userGuess;
+                computerchoice.textContent = "Computer Chose: " + computerGuess;
+                
+                
+
+        
+        };
+        
+        
+        </script>
+    </body>
+</html>
