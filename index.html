@@ -20,62 +20,73 @@
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
     <div>
-        <p id="directions">Press spacebar to begin, try and guess what letter I'm thinking of!</p>
-        <p id="userchoice"></p>
-        <p id="computerchoice"></p>
-        <p id="wins"></p>
-        <p id="losses"></p>
-        <p id="guessLeft"></p>
+        <h1> The Psychic Game</h1>
+        
+        <p id="directions">Try and guess what letter I'm thinking of, between A-H!</p>
+        <p id="userchoice">You Chose :</p>
+        <p id="computerchoice">Computer Chose :</p>
+        <p id="wins">Wins: </p>
+        <p id="losses">Losses: </p>
+        <p id="guessLeft">Guess Left</p>
+
     </div>
 
 
     <script type="text/javascript">
         //Create an array that lists out all the options 
-        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"];
+        var computerChoices = ["a", "b", "c", "d", "e", "f", "g", "h"];
 
-        //Create variables that hold the number of wins, loses, ties
+        //Create variables that hold the number of wins, loses, guess left
         var wins = 0;
         var losses = 0;
-        var guessLeft = 0;
+        var guessLeft = 10;
 
 
         //create variables that hold references to the places in the HTML where we want to display things.
-
+        var updateguessLeft = function(){
+            document.querySelector("#guessLeft").innerText = guessLeft;
+        };
         var userchoice = document.getElementById("userchoice");
+        
         var directions = document.getElementById("directions");
+        
         var computerchoice = document.getElementById("computerchoice");
         var winstext = document.getElementById("wins");
         var lossestext = document.getElementById("losses");
-        var guessLeft = document.getElementById("guessLeft");
+       
+        var reset = function(){
+            guessLeft = 10;
+            updateguessLeft();
+        }
+        
 
-
+        updateguessLeft();
         //Determines the function that is ran when ever a key is pressed
 
         document.onkeypress = function (event) {
-
-
+            //Reduce the guess by one
+            guessLeft--;
             //Determines which key is pressed
             var userGuess = event.key;
             //Determines the computers choice randomly
             var computerGuess = computerChoices[Math.floor(Math.random() * computerChoices.length)];
             // code run if these keys are pressed and the code block
-            var guessLeft = event.key;
             
+            updateguessLeft();
 
             if (userGuess === computerGuess) {
                 console.log("You win");
-                wins++
+                wins++;
                 winstext.textContent = "Wins " + wins;
+                alert("Winner Winner, Chicken Dinner!!!")
 
             } else {
                 console.log("You Lost");
-                losses++
+                losses++;
                 lossestext.textContent = "Losses " + losses;
-            } if (userGuess === computerGuess){
-                console.log("Guess-Left");
-                guessLeft++
-                guessLeft.textContent = "Guess-Left" + guessLeft;
-                
+            } if (guessLeft === 0){
+                alert("Game Over")
+                reset();
             }
             
 
@@ -91,3 +102,7 @@
 </body>
 
 </html>
+
+
+
+
